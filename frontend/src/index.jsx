@@ -3,6 +3,7 @@ import { util, ThemeProvider } from "@jakehamilton/ui";
 
 import App from "./App";
 import { glob } from "goober";
+import AuthProvider from "./components/AuthProvider";
 
 util.theme.injectGlobalStyles();
 
@@ -14,8 +15,10 @@ glob`
 `;
 
 render(
-    <ThemeProvider>
-        <App />
-    </ThemeProvider>,
+    <AuthProvider>
+        <ThemeProvider>
+            <App />
+        </ThemeProvider>
+    </AuthProvider>,
     document.getElementById("app")
 );

@@ -1,9 +1,11 @@
 import { h } from "preact";
+import { useState } from "preact/hooks";
 import { css } from "goober";
-import { AppBar, Block } from "@jakehamilton/ui";
+import { AppBar, Block, H2 } from "@jakehamilton/ui";
 import Router from "preact-router";
 import Home from "./Routes/Home";
 import Error404 from "./Routes/Error404";
+import Admin from "./Routes/Admin";
 
 const AppClass = css`
     display: flex;
@@ -15,12 +17,27 @@ const AppClass = css`
 const AppContentClass = css``;
 
 const App = () => {
+    const [route, setRoute] = useState(window.location.pathname);
+
+    const handleRouteChange = ({ url }) => {
+        setRoute(url);
+    };
+
+    let title;
+
+    if (route.startsWith("/admin")) {
+        title = "Admin";
+    } else {
+        title = "SkyPod";
+    }
+
     return (
         <Block color="background.light" className={AppClass}>
-            <AppBar />
+            <AppBar left={<H2>{title}</H2>} />
             <div className={AppContentClass}>
-                <Router>
+                <Router onChange={handleRouteChange}>
                     <Home path="/" />
+                    <Admin path="/admin" />
                     <Error404 default />
                 </Router>
             </div>

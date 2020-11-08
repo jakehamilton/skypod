@@ -3,6 +3,7 @@ const path = require("path");
 const { Manager } = require("@leverage/core");
 const { HTTP } = require("@leverage/plugin-http");
 const mongoose = require("mongoose");
+const littlelog = require("@littlethings/log");
 
 const log = require("./util/log");
 const requireAll = require("./util/require-all");
